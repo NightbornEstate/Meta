@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survival Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <h1 id="the-one-stop-guide-for-surviving-in-the-wild-without-a-void-">The one-stop guide for surviving in the wild without a Void 👀</h1>
+<hr>
+<p>This guide is going to be a running reference point for recreating / getting my work running, and explaining each component of the ecosystem.<br>I reccomend reading it all if I leave</p>
+<h2 id="digitalocean">DigitalOcean</h2>
+<p>I reccommend hosting all of the bots on <a href="https://digitalocean.com">DigitalOcean</a>, using PM2. Create an account and add your billing information, and create a new &quot;Droplet&quot;. I reccommend using the &quot;one click app&quot; <code>Docker x.y.z~ce on aa.bb</code>
+<img src="https://coding.has-destroyed.me/un2u0Bdt" alt="Docker 17.12.0~ce on 16.04"><br>I reccomend docker because some of the bots (LoLTrivia) use docker, and I&#39;m moving more to use it.  </p>
+<p>Set up SSH keys and login to the droplet</p>
+<h3 id="installing-node">Installing Node</h3>
+<p>You will need to install node, I reccommend using <code>nvm</code> because it allows you to use the most recent version, which my bot requires.
+The commands (taken from <a href="https://github.com/creationix/nvm">nvm&#39;s git</a>) look like this:</p>
+<ul>
+<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</code> - Install NVM</li>
+<li>Log out of SSH and log back in again</li>
+<li><code>nvm install 8.9.4</code></li>
+<li><code>nvm use 8.9.4</code></li>
+<li><code>node --version</code> =&gt; <code>8.7.0</code>  </li>
+</ul>
+<p>You can now run my bots (hopefully) :D</p>
+<h2 id="git-github">Git / GitHub</h2>
+<p>All of my bots are on <a href="https://github.com/codingJWilliams">my github</a> or the <a href="https://github.com/NightbornEstate">Nightborn github</a>. The basic command to use is <code>git clone https://github.com/ACCOUNT/REPONAME</code>. This downloads the source code. There&#39;ll usually be a config.json file to create, which will be specified in each bot below</p>
+<h2 id="trivia-bot">Trivia bot</h2>
+<p>The LoLTrivia bot is forked (read: copied and modified) from <a href="https://github.com/10se1ucgo/LoLTrivia">10sse1ucgo</a>. It&#39;s pretty simple to set up</p>
+<p>First clone the bot by typing <code>git clone https://github.com/NightbornEstate/LoLTrivia</code>. Once you have cloned the bot create a file called <code>config.json</code> in the LoLTrivia directory that has been created.
+The config.json file should look like so:</p>
+<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;bot&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;discord_token&quot;</span><span class="p">:</span> <span class="s2">&quot;Mzkarealtokenherepleasereplacemewitharealtoken&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;owner_id&quot;</span><span class="p">:</span> <span class="s2">&quot;193000000arealid&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;plugins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;lol&quot;</span><span class="p">],</span>
+  <span class="nt">&quot;plugins.lol&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;api_region&quot;</span><span class="p">:</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;RGAPI-a95c4816-0000-0000-0000-000&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">A</span> <span class="err">production</span> <span class="err">riot</span> <span class="err">key.</span> <span class="err">Hard</span> <span class="err">to</span> <span class="err">get.</span> 
+    <span class="nt">&quot;trivia&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;cd&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="err">//</span> <span class="err">The</span> <span class="err">cooldown</span> <span class="err">between</span> <span class="err">trivia</span> <span class="err">games</span>
+      <span class="nt">&quot;max_games&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;game_length&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;allowed_modes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;CLASSIC&quot;</span><span class="p">,</span> <span class="s2">&quot;ARAM&quot;</span><span class="p">,</span> <span class="s2">&quot;KINGPORO&quot;</span><span class="p">],</span>
+      <span class="nt">&quot;allowed_maps&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;SUMMONERS_RIFT&quot;</span><span class="p">,</span> <span class="s2">&quot;HOWLING_ABYSS&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+<h3 id="if-you-do-want-economy-features-you-have-successfully-set-up-nadekoconnector-">If you <em>do</em> want economy features (you have successfully set up NadekoConnector)</h3>
+<p>You should  go to the file <code>eco.py</code> in <code>LoLTrivia/plugins/lol/eco.py</code> and edit the following:</p>
+<ul>
+<li>On line 4, add <code>config = {&quot;ecokey&quot;: &quot;your eco key (from nadekoconnector)&quot;}</code></li>
+<li>On lines 12 and 24 change the ip and port to your NadekoConnector IP and port  </li>
+</ul>
+<p>The bot should be good to go, you can skip to <a href="#building-with-docker">building with docker</a></p>
+<h3 id="if-you-do-want-economy-features-you-have-successfully-set-up-nadekoconnector-">If you <em>do</em> want economy features (you have successfully set up NadekoConnector)</h3>
+<p>You should open the file <code>LoLTrivia/plugins/lol/questions.py</code> and make the following changes:</p>
+<h3 id="building-with-docker">Building with docker</h3>
+<p>test</p>
+
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
