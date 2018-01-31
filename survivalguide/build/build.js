@@ -19,7 +19,7 @@ marked.setOptions({
 marked(markdownString, function (err, content) {
   if (err) throw err;
   var html = template.replace("{{ content }}", content);
-  fs.writeFile("out.html", html, function () {
+  fs.writeFile("../index.html", html, function () {
     console.log("Finished in " + (Date.now() - started) + "ms")
   })
 });

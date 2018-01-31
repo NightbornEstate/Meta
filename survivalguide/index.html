@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Survival Guide</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+  <style>
+    .highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { /*border: 1px solid #FF0000*/ } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+pre {
+  margin-bottom: 0px !important;
+  padding-bottom: 0px !important;
+}
+  </style>
+</head>
+
+<body>
+  <section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          The one-stop guide for surviving in the wild without a Void 👀
+        </h1>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <p>This guide is going to be a running reference point for recreating / getting my work running, and explaining each component of the ecosystem.<br>I reccomend reading it thoroughly if I leave at any point. This guide is aimed at someone with basic linux and Node.JS experience</p>
+<h3 id="notice-some-commands-end-in-a-dot-if-the-dot-is-inside-the-red-code-block-you-should-include-it-else-don-t">Notice: Some commands end in a dot. If the dot is INSIDE the red code block you should include it, else don&#39;t</h3>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#trivia-bot">LoL Trivia Bot</a></li>
+<li><a href="#mongodb">Setting up Mongo</a></li>
+<li><a href="#janitor">Janitor</a></li>
+</ul>
+<h2 id="digitalocean">DigitalOcean</h2>
+<p>I reccommend hosting all of the bots on <a href="https://digitalocean.com">DigitalOcean</a>, using PM2. Create an account and add your billing information, and create a new &quot;Droplet&quot;. I reccommend using the &quot;one click app&quot; <code>Docker x.y.z~ce on aa.bb</code>
+<img src="https://coding.has-destroyed.me/un2u0Bdt" alt="Docker 17.12.0~ce on 16.04"><br>I reccomend docker because some of the bots (LoLTrivia) use docker, and I&#39;m moving more to use it.  </p>
+<p>Set up SSH keys and login to the droplet</p>
+<h3 id="installing-node">Installing Node</h3>
+<p>You will need to install node, I reccommend using <code>nvm</code> because it allows you to use the most recent version, which my bot requires.
+The commands (taken from <a href="https://github.com/creationix/nvm">nvm&#39;s git</a>) look like this:</p>
+<ul>
+<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</code> - Install NVM</li>
+<li>Log out of SSH and log back in again</li>
+<li><code>nvm install 8.9.4</code></li>
+<li><code>nvm use 8.9.4</code></li>
+<li><code>node --version</code> =&gt; <code>8.7.0</code><br>You should also install PM2 with the command <code>sudo npm install -g pm2</code>. This manages restarting the bots etc.
+You can now run my bots (hopefully) :D</li>
+</ul>
+<h3 id="pm2">PM2</h3>
+<p>The majority of the bots use pm2 to hide them in the background. You can use the command <code>pm2 ls</code> to show all running bots, <code>pm2 restart CheckUser</code> to restart a running bot called CheckUser etc.<br><img src="https://coding.has-destroyed.me/uECWO88n" alt=""></p>
+<h2 id="git-github">Git / GitHub</h2>
+<p>All of my bots are on <a href="https://github.com/codingJWilliams">my github</a> or the <a href="https://github.com/NightbornEstate">Nightborn github</a>. The basic command to use is <code>git clone https://github.com/ACCOUNT/REPONAME</code>. This downloads the source code. There&#39;ll usually be a config.json file to create, which will be specified in each bot below</p>
+<h1 id="trivia-bot">Trivia bot</h1>
+<p>The LoLTrivia bot is forked (read: copied and modified) from <a href="https://github.com/10se1ucgo/LoLTrivia">10sse1ucgo</a>. It&#39;s pretty simple to set up</p>
+<p>First clone the bot by typing <code>git clone https://github.com/NightbornEstate/LoLTrivia</code>. Once you have cloned the bot create a file called <code>config.json</code> in the LoLTrivia directory that has been created.
+The config.json file should look like so:</p>
+<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;bot&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;discord_token&quot;</span><span class="p">:</span> <span class="s2">&quot;Mzkarealtokenherepleasereplacemewitharealtoken&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;owner_id&quot;</span><span class="p">:</span> <span class="s2">&quot;193000000arealid&quot;</span>
+  <span class="p">},</span>
+  <span class="nt">&quot;plugins&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;lol&quot;</span><span class="p">],</span>
+  <span class="nt">&quot;plugins.lol&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;api_region&quot;</span><span class="p">:</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;api_key&quot;</span><span class="p">:</span> <span class="s2">&quot;RGAPI-a95c4816-0000-0000-0000-000&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">A</span> <span class="err">production</span> <span class="err">riot</span> <span class="err">key.</span> <span class="err">Hard</span> <span class="err">to</span> <span class="err">get.</span> 
+    <span class="nt">&quot;trivia&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;cd&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="err">//</span> <span class="err">The</span> <span class="err">cooldown</span> <span class="err">between</span> <span class="err">trivia</span> <span class="err">games</span>
+      <span class="nt">&quot;max_games&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;game_length&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;points&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="nt">&quot;allowed_modes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;CLASSIC&quot;</span><span class="p">,</span> <span class="s2">&quot;ARAM&quot;</span><span class="p">,</span> <span class="s2">&quot;KINGPORO&quot;</span><span class="p">],</span>
+      <span class="nt">&quot;allowed_maps&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;SUMMONERS_RIFT&quot;</span><span class="p">,</span> <span class="s2">&quot;HOWLING_ABYSS&quot;</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+<h3 id="if-you-do-want-economy-features-you-have-successfully-set-up-nadekoconnector-">If you <em>do</em> want economy features (you have successfully set up NadekoConnector)</h3>
+<p>You should  go to the file <code>eco.py</code> in <code>LoLTrivia/plugins/lol/eco.py</code> and edit the following:</p>
+<ul>
+<li>On line 4, add <code>config = {&quot;ecokey&quot;: &quot;your eco key (from nadekoconnector)&quot;}</code></li>
+<li>On lines 12 and 24 change the ip and port to your NadekoConnector IP and port  </li>
+</ul>
+<p>The bot should be good to go, you can skip to <a href="#building-with-docker">building with docker</a></p>
+<h3 id="if-you-don-t-want-economy-features-you-haven-t-yet-set-up-nadekoconnector-">If you <em>don&#39;t</em> want economy features (you haven&#39;t yet set up NadekoConnector)</h3>
+<p>You should  go to the file <code>LoLTrivia/plugins/lol/questions.py</code> and edit the following:</p>
+<ul>
+<li>On line 4, remove <code>from . import eco</code></li>
+<li><p>On lines 91 - 103, change this:</p>
+<pre><code class="lang-py"><div class="highlight"><pre>    <span class="n">soulsToAward</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">75</span>
+     <span class="n">bal</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">eco</span><span class="o">.</span><span class="n">gbal</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+     <span class="n">eco</span><span class="o">.</span><span class="n">award</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">soulsToAward</span><span class="p">)</span>
+
+     <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="bp">False</span>
+     <span class="n">points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;trivia&#39;</span><span class="p">][</span><span class="s">&#39;points&#39;</span><span class="p">]</span>
+     <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span>
+                               <span class="n">f</span><span class="s">&quot;Correct answer &#39;{ans}&#39;{self.extra} by {message.author.mention}! +{points} points&quot;</span>
+                               <span class="n">f</span><span class="s">&quot; (new score: {(get_score(message.author.id) or 0) + points})&quot;</span>
+                               <span class="n">f</span><span class="s">&quot; +{soulsToAward} :ghost: (new bal: {bal + soulsToAward})&quot;</span>
+                               <span class="p">)</span>
+     <span class="k">return</span> <span class="n">points</span>
+</pre></div>
+
+</code></pre>
+<p>to:</p>
+<pre><code class="lang-py"><div class="highlight"><pre>     <span class="bp">self</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="bp">False</span>
+     <span class="n">points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s">&#39;trivia&#39;</span><span class="p">][</span><span class="s">&#39;points&#39;</span><span class="p">]</span>
+     <span class="n">await</span> <span class="n">client</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span>
+                               <span class="n">f</span><span class="s">&quot;Correct answer &#39;{ans}&#39;{self.extra} by {message.author.mention}! +{points} points&quot;</span>
+                               <span class="n">f</span><span class="s">&quot; (new score: {(get_score(message.author.id) or 0) + points})&quot;</span>
+                               <span class="p">)</span>
+     <span class="k">return</span> <span class="n">points</span>
+</pre></div>
+
+</code></pre>
+<p>and the bot should be able to work without the connector. You can continue to <a href="#building-with-docker">building with docker</a>  </p>
+</li>
+</ul>
+<h3 id="building-with-docker">Building with docker</h3>
+<p>Assuming you have docker installed (IE you chose DigitalOcean&#39;s docker image OR followed <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04">this</a> guide) it should be easy to start the bot.
+You first have to build the bot, and you should do this on any source code updates:</p>
+<pre><code class="lang-bash"><div class="highlight"><pre>~/LoLTrivia<span class="nv">$ </span>docker build -t loltrivia .
+</pre></div>
+
+</code></pre>
+<p>This will take a while on first run, but it will go much faster afterwards.
+To run the bot, you can use one of two commands:<br><code>docker run loltrivia</code> will run the bot in your console. If you close the SSH session then the bot will stop, however you&#39;re able to see the bot&#39;s logs so this is good for testing.<br><code>docker run --name=trivia -d loltrivia</code> will start the bot in the background. This means you can close the SSH window without it stopping. To see if the bot is running you can type <code>docker ps</code> and to stop it type <code>docker stop trivia</code> then <code>docker rm trivia</code>.</p>
+<h1 id="mongodb">MongoDB</h1>
+<p>Most of the bots (Janitor, Sunset Bot, Nightborn Bot etc) need a <a href="https://www.mongodb.com/">MongoDB</a> instance to work. I recommend spinning up a second 1gb ram droplet to host this. You should use the One-click app &quot;MongoDB 3.4.10 on 16.04&quot;. Once you have set up the droplet and SSH&#39;d in you should do the following:</p>
+<ul>
+<li>Find the zip file void gave you with the database</li>
+<li>Unzip it to your desktop or wherever</li>
+<li>Connect via FileZilla and upload the whole folder so it sits at <code>/root/dump/</code>. Your files should be at <code>/root/dump/janitor/violations.bson</code> etc.</li>
+<li>At the terminal, use the <code>mongorestore</code> command in the terminal to restore the data, like so: <code>mongorestore --host=127.0.0.1 --port=27017 .</code></li>
+<li>Edit <code>/etc/mongod.conf</code> with your favourite editor (nano master race ftw) and make the following changes:<ul>
+<li>Under <code># network interfaces</code> change <code>bindIp: 127.0.0.1</code> to <code>bindIp: 0.0.0.0</code> to bind to other droplets</li>
+<li>Remove the <code>#</code> before <code>#security:</code> and add the following so it looks like so:<pre><code><div class="highlight"><pre><span class="nx">security</span><span class="o">:</span>
+<span class="nx">authorization</span><span class="o">:</span> <span class="nx">enabled</span>
+</pre></div>
+
+</code></pre></li>
+</ul>
+</li>
+<li>Run <code>sudo service mongod restart</code></li>
+<li>Run <code>sudo ufw allow 27017</code>  </li>
+</ul>
+<p>Once you&#39;ve done this, your base connection uri should look like so: <code>mongodb://nightborn:[ask void for the password]@[your mongo ip]:27017/</code>. Each bot has it&#39;s own database who&#39;s name should be added after the slash. Replace <code>[ask void for the password]</code> with the password I can give you and replace <code>[your mongo ip]</code> with the IP address of the mongo hosting droplet, from the control panel.
+<img src="https://coding.has-destroyed.me/u9YFjNdo" alt="Mongo IP Example"></p>
+<h1 id="janitor">Janitor</h1>
+<p>Janitor is the bot everybody knows and loves, for censoring hard r.
+The first step in setting it up is downloading the source from git. CD to your home directory using <code>cd ~</code> then download the bot using git: <code>git clone https://github.com/codingJWilliams/Janitor</code>.
+CD to the bot <code>cd Janitor</code> then install the dependencies by typing <code>npm install</code>. This might take a while to download.
+You should make a file called <code>token.json</code> with the following contents:</p>
+<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;NDA0njareaLLyd4nkt0keN_sh.oUld-g0hErE&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;mongo&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb://nigh... your connection uri...:27017/janitor&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+<p>Replacing <code>mongodb://nigh... your connection uri...:27017</code> with the base URI from the <a href="#mongodb">MongoDB</a> step.
+Then test the bot in your terminal by typing <code>node bot.js</code> and ensuring the output looks like so:</p>
+<pre><code><div class="highlight"><pre><span class="nx">jay</span><span class="err">@</span><span class="nx">nb</span><span class="o">-</span><span class="nx">bothost</span><span class="o">-</span><span class="mi">1</span><span class="o">:~</span><span class="err">/Janitor$ node bot</span>
+<span class="p">(</span><span class="nx">node</span><span class="o">:</span><span class="mi">3621</span><span class="p">)</span> <span class="nx">ExperimentalWarning</span><span class="o">:</span> <span class="nx">The</span> <span class="nx">http2</span> <span class="nx">module</span> <span class="nx">is</span> <span class="nx">an</span> <span class="nx">experimental</span> <span class="nx">API</span><span class="p">.</span>
+<span class="nx">Connected</span> <span class="nx">successfully</span> <span class="nx">to</span> <span class="nx">server</span>
+<span class="nx">Logged</span> <span class="k">in</span> <span class="nx">as</span> <span class="nx">The</span> <span class="nx">Cleaner</span><span class="err">#</span><span class="mi">1641</span><span class="o">!</span>
+</pre></div>
+
+</code></pre><p>The first error is completely normal, and a warning only.  </p>
+<p>Next you need to start the bot with pm2 so it runs without the console open. You can do this with the command <code>pm2 start bot.js --name=&quot;Janitor&quot;</code>. See <a href="#pm2">the pm2 section</a> for more commands.
+Janitor should now be running and ready to track violations :D</p>
+
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>
