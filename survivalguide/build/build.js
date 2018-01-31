@@ -9,6 +9,7 @@ var started = Date.now();
 marked.setOptions({
   highlight: function (code, lang, callback) {
     require('pygmentize-bundled')({ lang: lang, format: 'html' }, code, function (err, result) {
+      console.log(result.toString())
       callback(err, result.toString());
     });
   }
