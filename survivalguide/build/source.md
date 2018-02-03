@@ -7,6 +7,8 @@ I reccomend reading it thoroughly if I leave at any point. This guide is aimed a
  - [LoL Trivia Bot](#trivia-bot)
  - [Setting up Mongo](#mongodb)
  - [Janitor](#janitor)
+ - [Sunset Bot](#sunset-bot)
+ - [Nightborn Bot](#nightborn-bot)
 
 ## DigitalOcean
 I reccommend hosting all of the bots on [DigitalOcean](https://digitalocean.com), using PM2. Create an account and add your billing information, and create a new "Droplet". I reccommend using the "one click app" `Docker x.y.z~ce on aa.bb`
@@ -103,7 +105,7 @@ You first have to build the bot, and you should do this on any source code updat
 ```
 This will take a while on first run, but it will go much faster afterwards.
 To run the bot, you can use one of two commands:  
-`docker run loltrivia` will run the bot in your console. If you close the SSH session then the bot will stop, however you're able to see the bot's logs so this is good for testing.  
+`docker run loltrivia` will run the bot in your console. If you close the SSH session then the bot will stop, however you're able to see the bot's logs so this is good for testing. Press CTRL-C to exit.  
 `docker run --name=trivia -d loltrivia` will start the bot in the background. This means you can close the SSH window without it stopping. To see if the bot is running you can type `docker ps` and to stop it type `docker stop trivia` then `docker rm trivia`.
 
 # MongoDB  
@@ -147,3 +149,75 @@ The first error is completely normal, and a warning only.
 
 Next you need to start the bot with pm2 so it runs without the console open. You can do this with the command `pm2 start bot.js --name="Janitor"`. See [the pm2 section](#pm2) for more commands.
 Janitor should now be running and ready to track violations :D
+# Sunset Bot
+Sunset bot, which runs under the Divergence token, deals with clans and sharableroles. Firstly you should download the source of the bot.  
+ - cd to your home directory `cd ~`
+ - clone the bot `git clone https://github.com/codingjwilliams/SunsetBot`
+ - cd to it `cd SunsetBot`
+ - install the dependencies `npm install`
+ - create a file called `config.json` that looks like so:
+```json
+{
+  "token": "NDA0njareaLLyd4nkt0keN_sh.oUld-g0hErE",
+  "mongo": "mongodb://nigh... your connection uri...:27017/sunset",
+  "ecoserver_key": "your NadekoConnector key",
+  "ecoserver_ip": "ip address of NadekoConnector",
+  "ecoserver_port": "3000"
+}
+```
+ - test that the bot runs with `node bot`.
+ If you see `DB Up :D` then `Ready :D` then everything is configured correctly.
+ - press CTRL-C to exit it
+ - start the bot with pm2 by typing `pm2 start bot.js --name="Sunset"`  
+
+The listener for Mee6 level ups is broken and to be honest, I can't be bothered to repair it. It's in `SunsetBot/listeners/daddybot.js` if you wish to debug and fix it
+
+# Nightborn Bot
+Ok, I've procrastinated long enough writing a guide for Nightborn bot. The bot is *very* (read: too) complicated. Let's start with downloading the source code.
+ - cd to your home directory `cd ~`
+ - clone the bot `git clone https://github.com/codingjwilliams/Nightborn`
+ - cd to it `cd Nightborn`
+ - install the dependencies `npm install`  
+Next, you need to create the `config.json`. It should look like this, exclduing the "//" comments at the end of the lines, which are there for your benefit:
+```json
+{
+    "token": "bot-token", // Self explanatory
+    "ecoserver_key": "your eco key", // same as other bots
+    "ecoserver_ip": "eco server ip", // ^
+    "ecoserver_port": "3000",  // Leave this, the NadekoConnector runs on 3000 by default
+    "mc": {          // You can get these three from void
+     "username": "-",
+     "password": "-",
+      "salt": "-"
+    },
+    "trelloToken": "51b4...", // Get this from void, it's for the ,pls command
+    "trelloKey": "23b98c8e3c2",// ^
+    "dbUrl": "mongodb://<your connection uri>/nightborn", // Same as other bots
+    "datadog": {
+      "appkey": "aba880af239de496d3b3b9a39636b246fd88328b", // Get these from void
+      "apikey": "1943fb91b034e98c26e2913a8d9cf1fd" // This is for the graphs and statistics
+    }
+}
+```
+Next, you should create a file called `aws.json`. This will contain an AWS IAM key which has permission to invoke the welcome generation lambda. It's best to use void's keys for now but I pay (a small amount) for it so eventually you can set up your own. The aws.json file should look like so:
+```json
+{
+    "accessKeyId": "AKI...",
+    "secretAccessKey": "YHW8CAps...",
+    "region": "us-east-1"
+}
+```
+I haven't written a guide for getting the Panel running yet so for now, open `Nightborn/eventlisteners/ready/createSocket.js` and replace everything there with this:
+```js
+module.exports = () => {
+  var noop = () => {};
+  global.logSocket.on = noop;
+  global.logSocket.emit = noop;
+}
+```
+Which disables sending logs to the NightbornPanel
+You should be ready to test the bot now.  
+ - test the bot in your terminal by typing `node bot`.
+ You should see this: ![Log output](https://i.imgur.com/KHE3xbG.png)
+ - stop the bot running with CTRL-C
+ - start the bot with pm2 `pm2 start bot.js --name="NB"`

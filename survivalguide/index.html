@@ -105,6 +105,8 @@ pre {
 <li><a href="#trivia-bot">LoL Trivia Bot</a></li>
 <li><a href="#mongodb">Setting up Mongo</a></li>
 <li><a href="#janitor">Janitor</a></li>
+<li><a href="#sunset-bot">Sunset Bot</a></li>
+<li><a href="#nightborn-bot">Nightborn Bot</a></li>
 </ul>
 <h2 id="digitalocean">DigitalOcean</h2>
 <p>I reccommend hosting all of the bots on <a href="https://digitalocean.com">DigitalOcean</a>, using PM2. Create an account and add your billing information, and create a new &quot;Droplet&quot;. I reccommend using the &quot;one click app&quot; <code>Docker x.y.z~ce on aa.bb</code>
@@ -200,7 +202,7 @@ You first have to build the bot, and you should do this on any source code updat
 
 </code></pre>
 <p>This will take a while on first run, but it will go much faster afterwards.
-To run the bot, you can use one of two commands:<br><code>docker run loltrivia</code> will run the bot in your console. If you close the SSH session then the bot will stop, however you&#39;re able to see the bot&#39;s logs so this is good for testing.<br><code>docker run --name=trivia -d loltrivia</code> will start the bot in the background. This means you can close the SSH window without it stopping. To see if the bot is running you can type <code>docker ps</code> and to stop it type <code>docker stop trivia</code> then <code>docker rm trivia</code>.</p>
+To run the bot, you can use one of two commands:<br><code>docker run loltrivia</code> will run the bot in your console. If you close the SSH session then the bot will stop, however you&#39;re able to see the bot&#39;s logs so this is good for testing. Press CTRL-C to exit.<br><code>docker run --name=trivia -d loltrivia</code> will start the bot in the background. This means you can close the SSH window without it stopping. To see if the bot is running you can type <code>docker ps</code> and to stop it type <code>docker stop trivia</code> then <code>docker rm trivia</code>.</p>
 <h1 id="mongodb">MongoDB</h1>
 <p>Most of the bots (Janitor, Sunset Bot, Nightborn Bot etc) need a <a href="https://www.mongodb.com/">MongoDB</a> instance to work. I recommend spinning up a second 1gb ram droplet to host this. You should use the One-click app &quot;MongoDB 3.4.10 on 16.04&quot;. Once you have set up the droplet and SSH&#39;d in you should do the following:</p>
 <ul>
@@ -245,6 +247,80 @@ Then test the bot in your terminal by typing <code>node bot.js</code> and ensuri
 </code></pre><p>The first error is completely normal, and a warning only.  </p>
 <p>Next you need to start the bot with pm2 so it runs without the console open. You can do this with the command <code>pm2 start bot.js --name=&quot;Janitor&quot;</code>. See <a href="#pm2">the pm2 section</a> for more commands.
 Janitor should now be running and ready to track violations :D</p>
+<h1 id="sunset-bot">Sunset Bot</h1>
+<p>Sunset bot, which runs under the Divergence token, deals with clans and sharableroles. Firstly you should download the source of the bot.  </p>
+<ul>
+<li>cd to your home directory <code>cd ~</code></li>
+<li>clone the bot <code>git clone https://github.com/codingjwilliams/SunsetBot</code></li>
+<li>cd to it <code>cd SunsetBot</code></li>
+<li>install the dependencies <code>npm install</code></li>
+<li>create a file called <code>config.json</code> that looks like so:<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+<span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;NDA0njareaLLyd4nkt0keN_sh.oUld-g0hErE&quot;</span><span class="p">,</span>
+<span class="nt">&quot;mongo&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb://nigh... your connection uri...:27017/sunset&quot;</span><span class="p">,</span>
+<span class="nt">&quot;ecoserver_key&quot;</span><span class="p">:</span> <span class="s2">&quot;your NadekoConnector key&quot;</span><span class="p">,</span>
+<span class="nt">&quot;ecoserver_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;ip address of NadekoConnector&quot;</span><span class="p">,</span>
+<span class="nt">&quot;ecoserver_port&quot;</span><span class="p">:</span> <span class="s2">&quot;3000&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+</li>
+<li>test that the bot runs with <code>node bot</code>.
+If you see <code>DB Up :D</code> then <code>Ready :D</code> then everything is configured correctly.</li>
+<li>press CTRL-C to exit it</li>
+<li>start the bot with pm2 by typing <code>pm2 start bot.js --name=&quot;Sunset&quot;</code>  </li>
+</ul>
+<p>The listener for Mee6 level ups is broken and to be honest, I can&#39;t be bothered to repair it. It&#39;s in <code>SunsetBot/listeners/daddybot.js</code> if you wish to debug and fix it</p>
+<h1 id="nightborn-bot">Nightborn Bot</h1>
+<p>Ok, I&#39;ve procrastinated long enough writing a guide for Nightborn bot. The bot is <em>very</em> (read: too) complicated. Let&#39;s start with downloading the source code.</p>
+<ul>
+<li>cd to your home directory <code>cd ~</code></li>
+<li>clone the bot <code>git clone https://github.com/codingjwilliams/Nightborn</code></li>
+<li>cd to it <code>cd Nightborn</code></li>
+<li>install the dependencies <code>npm install</code><br>Next, you need to create the <code>config.json</code>. It should look like this, exclduing the &quot;//&quot; comments at the end of the lines, which are there for your benefit:<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+ <span class="nt">&quot;token&quot;</span><span class="p">:</span> <span class="s2">&quot;bot-token&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">Self</span> <span class="err">explanatory</span>
+ <span class="nt">&quot;ecoserver_key&quot;</span><span class="p">:</span> <span class="s2">&quot;your eco key&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">same</span> <span class="err">as</span> <span class="err">other</span> <span class="err">bots</span>
+ <span class="nt">&quot;ecoserver_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;eco server ip&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">^</span>
+ <span class="nt">&quot;ecoserver_port&quot;</span><span class="p">:</span> <span class="s2">&quot;3000&quot;</span><span class="p">,</span>  <span class="err">//</span> <span class="err">Leave</span> <span class="err">this,</span> <span class="err">the</span> <span class="err">NadekoConnector</span> <span class="err">runs</span> <span class="err">on</span> <span class="err">3000</span> <span class="err">by</span> <span class="err">default</span>
+ <span class="nt">&quot;mc&quot;</span><span class="p">:</span> <span class="p">{</span>          <span class="err">//</span> <span class="err">You</span> <span class="err">can</span> <span class="err">get</span> <span class="err">these</span> <span class="err">three</span> <span class="err">from</span> <span class="err">void</span>
+  <span class="nt">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+   <span class="nt">&quot;salt&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span>
+ <span class="p">},</span>
+ <span class="nt">&quot;trelloToken&quot;</span><span class="p">:</span> <span class="s2">&quot;51b4...&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">Get</span> <span class="err">this</span> <span class="err">from</span> <span class="err">void,</span> <span class="err">it&#39;s</span> <span class="err">for</span> <span class="err">the</span> <span class="err">,pls</span> <span class="err">command</span>
+ <span class="nt">&quot;trelloKey&quot;</span><span class="p">:</span> <span class="s2">&quot;23b98c8e3c2&quot;</span><span class="p">,</span><span class="err">//</span> <span class="err">^</span>
+ <span class="nt">&quot;dbUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;mongodb://&lt;your connection uri&gt;/nightborn&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">Same</span> <span class="err">as</span> <span class="err">other</span> <span class="err">bots</span>
+ <span class="nt">&quot;datadog&quot;</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nt">&quot;appkey&quot;</span><span class="p">:</span> <span class="s2">&quot;aba880af239de496d3b3b9a39636b246fd88328b&quot;</span><span class="p">,</span> <span class="err">//</span> <span class="err">Get</span> <span class="err">these</span> <span class="err">from</span> <span class="err">void</span>
+   <span class="nt">&quot;apikey&quot;</span><span class="p">:</span> <span class="s2">&quot;1943fb91b034e98c26e2913a8d9cf1fd&quot;</span> <span class="err">//</span> <span class="err">This</span> <span class="err">is</span> <span class="err">for</span> <span class="err">the</span> <span class="err">graphs</span> <span class="err">and</span> <span class="err">statistics</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+Next, you should create a file called <code>aws.json</code>. This will contain an AWS IAM key which has permission to invoke the welcome generation lambda. It&#39;s best to use void&#39;s keys for now but I pay (a small amount) for it so eventually you can set up your own. The aws.json file should look like so:<pre><code class="lang-json"><div class="highlight"><pre><span class="p">{</span>
+ <span class="nt">&quot;accessKeyId&quot;</span><span class="p">:</span> <span class="s2">&quot;AKI...&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;secretAccessKey&quot;</span><span class="p">:</span> <span class="s2">&quot;YHW8CAps...&quot;</span><span class="p">,</span>
+ <span class="nt">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-1&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+I haven&#39;t written a guide for getting the Panel running yet so for now, open <code>Nightborn/eventlisteners/ready/createSocket.js</code> and replace everything there with this:<pre><code class="lang-js"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="kd">var</span> <span class="nx">noop</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{};</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">logSocket</span><span class="p">.</span><span class="nx">on</span> <span class="o">=</span> <span class="nx">noop</span><span class="p">;</span>
+<span class="nx">global</span><span class="p">.</span><span class="nx">logSocket</span><span class="p">.</span><span class="nx">emit</span> <span class="o">=</span> <span class="nx">noop</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</code></pre>
+Which disables sending logs to the NightbornPanel
+You should be ready to test the bot now.  </li>
+<li>test the bot in your terminal by typing <code>node bot</code>.
+You should see this: <img src="https://i.imgur.com/KHE3xbG.png" alt="Log output"></li>
+<li>stop the bot running with CTRL-C</li>
+<li>start the bot with pm2 <code>pm2 start bot.js --name=&quot;NB&quot;</code></li>
+</ul>
 
       </div>
     </div>
